@@ -401,8 +401,50 @@ GET /customers/1/invoices/2012010001.pdf
 
 
 
+--- Infrastructure ---
+
+-- Virtual --
+
+Creates new virtual
+
+Request attributes: 
+
+  - email: Company's billing email contact
+  - vat_prefix: TAX number country prefix
+  
+POST   /customers
+> Accept: application/json
 {
-  "hostname": "test.dom.tld",
-  "ram": 1024,
-  "storage": 10
+  "email": "ak@vmin.cz",
+  "locale": "cs" 
 }
+
+< 201
+< Content-Type: application/json
+{
+  "vat_prefix": "CZ",
+  "locale": "cs"
+}
+
+Get list of all customers
+GET /customers
+> Accept: application/json
+< 200
+< Content-Type: application/json
+
+[{
+  "email": "ak@vmin.cz",
+  "legal_name": "ACME ltd",
+  "street": "Mulholand Drive",
+  "number": "13",
+  "address2": "Upthehill quarter",
+  "city": "Cernosice",
+  "invoice_name": "Oh Mc'Donald",
+  "zip": "25228",
+  "ic": "12345678",
+  "vat": "12345678",
+  "country": "CZ",
+  "paying_vat": "true",
+  "vat_prefix": "CZ",
+  "locale": "cs"
+}]
