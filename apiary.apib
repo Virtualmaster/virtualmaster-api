@@ -1,0 +1,405 @@
+--- Billing application---
+
+-- Customers --
+
+Creates new customer
+
+Request attributes: 
+
+  - email: Company's billing email contact
+  - legal_name: Official, full name of company
+  - street: Official address street name
+  - number: Official address building number
+  - address2: Additional address line
+  - city: Official address city
+  - zip: Postal code
+  - country: country code ISO 3166-1 alpha-2
+  - invoice_name: Name of representative of company able to reecive billing documents
+  - ic: Company identification number
+  - vat: TAX number (VAT number) without country prefix
+  - vat_prefix: TAX number country prefix
+  - locale: ISO 639-1 code of language used in all documents and official communication
+  
+POST   /customers
+> Accept: application/json
+{
+  "email": "ak@vmin.cz",
+  "legal_name": "ACME ltd",
+  "street": "Mulholand Drive",
+  "number": "13",
+  "address2": "Upthehill quarter",
+  "city": "Cernosice",
+  "invoice_name": "Oh Mc'Donald",
+  "zip": "25228",
+  "ic": "12345678",
+  "vat": "12345678",
+  "country": "CZ",
+  "paying_vat": "true",
+  "vat_prefix": "CZ",
+  "locale": "cs" 
+}
+< 201
+< Content-Type: application/json
+{
+  "email": "ak@vmin.cz",
+  "legal_name": "ACME ltd",
+  "street": "Mulholand Drive",
+  "number": "13",
+  "address2": "Upthehill quarter",
+  "city": "Cernosice",
+  "invoice_name": "Oh Mc'Donald",
+  "zip": "25228",
+  "ic": "12345678",
+  "vat": "12345678",
+  "country": "CZ",
+  "paying_vat": "true",
+  "vat_prefix": "CZ",
+  "locale": "cs"
+}
+
+--- Billing application---
+
+Get list of all customers
+GET /customers
+> Accept: application/json
+< 200
+< Content-Type: application/json
+
+[{
+  "email": "ak@vmin.cz",
+  "legal_name": "ACME ltd",
+  "street": "Mulholand Drive",
+  "number": "13",
+  "address2": "Upthehill quarter",
+  "city": "Cernosice",
+  "invoice_name": "Oh Mc'Donald",
+  "zip": "25228",
+  "ic": "12345678",
+  "vat": "12345678",
+  "country": "CZ",
+  "paying_vat": "true",
+  "vat_prefix": "CZ",
+  "locale": "cs"
+}]
+
+
+
+
+Get detail of specific customer
+GET    /customers/1
+> Accept: application/json
+< 200
+< Content-Type: application/json
+{
+  "id": "1",
+  "email": "ak@vmin.cz",
+  "legal_name": "ACME ltd",
+  "street": "Mulholand Drive",
+  "number": "13",
+  "address2": "Upthehill quarter",
+  "city": "Cernosice",
+  "invoice_name": "Oh Mc'Donald",
+  "zip": "25228",
+  "ic": "12345678",
+  "vat": "12345678",
+  "country": "CZ",
+  "paying_vat": "true",
+  "vat_prefix": "CZ",
+  "locale": "cs"
+}
+
+
+Update specific customer
+PUT    /customers/1
+> Accept: application/json
+{
+  "email": "adam.kliment@virtualmaster.cz",
+  "legal_name": "Virtualmaster",
+}
+< 204
+
+
+Delete specific customer
+DELETE    /customers/1
+> Accept: application/json
+< 204
+
+
+-- Service instances --
+
+Create service instance
+
+Only admin can do this
+
+Attributes:
+
+- identificator: unique identificator for the service instance, if not present, will be generated
+- price: unit price without tax
+- currency: currency (can't differ from customer at the moment)
+- service_attributes: JSON with serialized service attribtues
+
+POST /customers/1/service_instances
+> Accept: application/json
+{
+    "identificator": "virtual-1",
+    "price": "1.5",
+    "currency": "CZK",
+    "service_attributes": {
+        "volume": "3"
+    }
+}
+< 201
+< Content-Type: application/json
+{
+    "id": "1",
+    "identificator": "virtual-1",
+    "price": "1.5",
+    "currency": "CZK",
+    "service_attributes": {
+        "volume": "3"
+    },
+    "version": "1"
+}
+
+Get all existing service instances for the customer
+
+GET /customers/1/service_instances
+> Accept: application/json
+< 200
+< Content-Type: application/json
+[
+{
+    "id": "1",
+    "identificator": "virtual-1",
+    "price": "1.5",
+    "currency": "CZK",
+    "service_attributes": {
+        "volume": "3"
+    },
+    "version": "1"
+}
+]
+
+Get detail of existing service instance
+
+GET /customers/1/service_instances/1
+> Accept: application/json
+< 200
+< Content-Type: application/json
+{
+    "id": "1",
+    "identificator": "virtual-1",
+    "price": "1.5",
+    "currency": "CZK",
+    "service_attributes": {
+        "volume": "3"
+    },
+    "version": "1"
+}
+
+
+Update existing service instance
+
+PUT /customers/1/service_instances/1
+> Accept: application/json
+{
+    "price": "2",
+    "service_attributes": {
+        "volume": "4"
+    }
+}
+< 204
+
+
+Delete existing service instance
+
+DELETE /customers/1/service_instances/1
+> Accept: application/json
+< 204
+
+
+-- Service invoice items --
+
+Create new, not invoiced (opened) service invoice item for customer
+
+Attributes:
+
+  - desc: Item description
+  - quantity: invoiced units queantity
+  - unitprice: price for 1 invoiced unit without tax
+  - discount: discount in percents
+  - tax: tax in percents
+  - note: Item note
+  - code: Code for type of transaction
+  - started_at: start of fullfillment in format ISO 8601
+  - ended_at: end of fullfillment in format ISO 8601
+
+POST /customers/1/service_invoice_items
+> Accept: application/json
+{
+    "desc": "Item description",
+    "quantity": "10",
+    "unitprice": "1",
+    "discount": "0",
+    "tax": "20",
+    "note": "Item note",
+    "code": "service",
+    "started_at" "2012-08-1T00:01:01+02:00",
+    "ended_at":  "2012-08-1T00:11:01+02:00",
+}
+< 201
+< Content-Type: application/json
+{
+    "id": "1",
+    "desc": "Item description",
+    "quantity": "10",
+    "unitprice": "1",
+    "discount": "0",
+    "tax": "20",
+    "note": "Item note",
+    "code": "service",
+    "started_at" "2012-08-1T00:01:01+02:00",
+    "ended_at":  "2012-08-1T00:11:01+02:00",
+}
+
+
+
+Get all customer's invoice items
+GET /customers/1/service_invoice_items
+> Accept: application/json
+< 200
+< Content-Type: application/json
+[
+{
+    "id": "1",
+    "desc": "Item description",
+    "quantity": "10",
+    "unitprice": "1",
+    "discount": "0",
+    "tax": "20",
+    "note": "Item note",
+    "code": "service",
+    "started_at" "2012-08-1T00:01:01+02:00",
+    "ended_at":  "2012-08-1T00:11:01+02:00",
+}
+]
+
+
+Get specific invoice item
+GET /customers/1/service_invoice_items/1
+> Accept: application/json
+< 200
+< Content-Type: application/json
+{
+    "id": "1",
+    "desc": "Item description",
+    "quantity": "10",
+    "unitprice": "1",
+    "discount": "0",
+    "tax": "20",
+    "note": "Item note",
+    "code": "service",
+    "started_at" "2012-08-1T00:01:01+02:00",
+    "ended_at":  "2012-08-1T00:11:01+02:00",
+}
+
+
+Update specifc invoice item
+PUT /customers/1/service_invoice_items/1
+> Accept: application/json
+{
+  "desc" "Changed item description"    
+}
+< 204
+
+
+Delete specifc invoice item
+DELETE /customers/1/service_invoice_items/1
+> Accept: application/json
+< 204
+
+
+-- Invoices --
+
+Get all customer's existing invoices
+
+GET /customers/1/invoices
+> Accept: application/json
+< 200
+< Content-Type: application/json
+[
+{
+    "customer_id": "1",
+    "number": "2012010001",
+    "issued_at": "2012-01-01",
+    "due_at": "2012-01-15",
+    "fulfillment_at": "2011-12-31",
+    "issued_by": "TinTin MacGyver",
+    "payment_type": "bank_transfer",
+    "rounding": "0",
+    "state": "paid",
+    "type": "ServiceInvoice",
+    "tax_rate": "20",
+    "price_total": "2200",
+    "language": "cs",
+    "vs": "2012010001",
+    "currency": "CZK",
+    "tax_mode": "czech"
+},
+{
+    "customer_id": "1",
+    "number": "2012010001",
+    "issued_at": "2012-01-01",
+    "due_at": "2012-01-15",
+    "fulfillment_at": "2011-12-31",
+    "issued_by": "TinTin MacGyver",
+    "payment_type": "bank_transfer",
+    "rounding": "0",
+    "state": "paid",
+    "type": "CreditInvoice",
+    "tax_rate": "20",
+    "price_total": "5000",
+    "language": "cs",
+    "vs": "2012010001",
+    "currency": "CZK",
+    "tax_mode": "czech"
+}
+]
+
+
+Get detail of specific customer's 
+
+GET /customers/1/invoices/2012010001
+> Accept: application/json
+< 200
+< Content-Type: application/json
+{
+    "customer_id": "1",
+    "number": "2012010001",
+    "issued_at": "2012-01-01",
+    "due_at": "2012-01-15",
+    "fulfillment_at": "2011-12-31",
+    "issued_by": "TinTin MacGyver",
+    "payment_type": "bank_transfer",
+    "rounding": "0",
+    "state": "paid",
+    "type": "ServiceInvoice",
+    "tax_rate": "20",
+    "price_total": "2200",
+    "language": "cs",
+    "vs": "2012010001",
+    "currency": "CZK",
+    "tax_mode": "czech"
+}
+
+
+Download specific customer's invoice in PDF
+Test comment for apiary
+
+GET /customers/1/invoices/2012010001.pdf
+< 200
+< Content-Type:application/pdf
+
+
+
+
