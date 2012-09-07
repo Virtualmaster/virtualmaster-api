@@ -1,5 +1,3 @@
---- Billing application---
-
 -- Customers --
 
 Creates new customer
@@ -22,65 +20,18 @@ Request attributes:
   
 POST   /customers
 > Accept: application/json
-{
-  "email": "ak@vmin.cz",
-  "legal_name": "ACME ltd",
-  "street": "Mulholand Drive",
-  "number": "13",
-  "address2": "Upthehill quarter",
-  "city": "Cernosice",
-  "invoice_name": "Oh Mc'Donald",
-  "zip": "25228",
-  "ic": "12345678",
-  "vat": "12345678",
-  "country": "CZ",
-  "paying_vat": "true",
-  "vat_prefix": "CZ",
-  "locale": "cs" 
-}
+***** Customer.not_saved
 < 201
 < Content-Type: application/json
-{
-  "email": "ak@vmin.cz",
-  "legal_name": "ACME ltd",
-  "street": "Mulholand Drive",
-  "number": "13",
-  "address2": "Upthehill quarter",
-  "city": "Cernosice",
-  "invoice_name": "Oh Mc'Donald",
-  "zip": "25228",
-  "ic": "12345678",
-  "vat": "12345678",
-  "country": "CZ",
-  "paying_vat": "true",
-  "vat_prefix": "CZ",
-  "locale": "cs"
-}
+***** Customer.saved
+
 
 Get list of all customers
 GET /customers
 > Accept: application/json
 < 200
 < Content-Type: application/json
-
-[{
-  "email": "ak@vmin.cz",
-  "legal_name": "ACME ltd",
-  "street": "Mulholand Drive",
-  "number": "13",
-  "address2": "Upthehill quarter",
-  "city": "Cernosice",
-  "invoice_name": "Oh Mc'Donald",
-  "zip": "25228",
-  "ic": "12345678",
-  "vat": "12345678",
-  "country": "CZ",
-  "paying_vat": "true",
-  "vat_prefix": "CZ",
-  "locale": "cs"
-}]
-
-
+***** Customer.all_saved
 
 
 Get detail of specific customer
@@ -88,23 +39,7 @@ GET    /customers/1
 > Accept: application/json
 < 200
 < Content-Type: application/json
-{
-  "id": "1",
-  "email": "ak@vmin.cz",
-  "legal_name": "ACME ltd",
-  "street": "Mulholand Drive",
-  "number": "13",
-  "address2": "Upthehill quarter",
-  "city": "Cernosice",
-  "invoice_name": "Oh Mc'Donald",
-  "zip": "25228",
-  "ic": "12345678",
-  "vat": "12345678",
-  "country": "CZ",
-  "paying_vat": "true",
-  "vat_prefix": "CZ",
-  "locale": "cs"
-}
+***** Customer.saved
 
 
 Update specific customer

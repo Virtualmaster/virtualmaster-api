@@ -1,47 +1,18 @@
---- Infrastructure ---
+-- Instance --
 
--- Virtual --
-
-Creates new virtual
-
-Request attributes: 
-
-  - email: Company's billing email contact
-  - vat_prefix: TAX number country prefix
-  
-POST   /customers
+POST   /instances
 > Accept: application/json
-{
-  "email": "ak@vmin.cz",
-  "locale": "cs" 
-}
-
+***** Instance.not_saved
 < 201
 < Content-Type: application/json
-{
-  "vat_prefix": "CZ",
-  "locale": "cs"
-}
+***** Instance.saved
 
-Get list of all customers
-GET /customers
+
+GET   /instances
 > Accept: application/json
-< 200
+< 201
 < Content-Type: application/json
+***** Instance.many_saved
 
-[{
-  "email": "ak@vmin.cz",
-  "legal_name": "ACME ltd",
-  "street": "Mulholand Drive",
-  "number": "13",
-  "address2": "Upthehill quarter",
-  "city": "Cernosice",
-  "invoice_name": "Oh Mc'Donald",
-  "zip": "25228",
-  "ic": "12345678",
-  "vat": "12345678",
-  "country": "CZ",
-  "paying_vat": "true",
-  "vat_prefix": "CZ",
-  "locale": "cs"
-}]
+
+
