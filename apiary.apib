@@ -1,4 +1,73 @@
---- Billing application---
+--- Virtualmaster public API---
+---
+# Structure of resources
+## Infrastructure
+Available at URL: https://infra.virtualmaster.com/api/v1/
+
+Resouces:
+
+- Virtual
+- Ip Address
+- Hostnode
+- Cluster
+- Network interface
+- Migration
+- Request
+- Setting
+- Subnet
+- Violation
+- Volume group
+- Logical volume
+- Replication
+
+## Billing
+Available at URL: https://billing.virtualmaster.com/api/v1/
+
+Resources:
+
+- Customer
+- Service Instance
+- Invoice
+- Service Invoice Item
+- Grouped Consumed Resources
+
+## Support
+Available at URL: https://support.virtualmaster.com/api/v1/
+
+Resources:
+
+- Issue
+- Issue Item
+- Tracked Time
+
+## Imagestore
+Available at URL: https://imagestore.virtualmaster.com/api/v1/
+
+Resources:
+
+- Image
+- Operating System
+
+## Backup
+Available at URL: https://backup.virtualmaster.com/api/v1/
+
+Resources:
+
+- Repository
+- Backup
+
+
+## ID - OAuth provider
+Available at URL: https://id.virtualmaster.com/api/v1/
+
+Resources:
+
+- Person
+- Email
+- Phone Number
+- SSH keys
+
+---
 
 -- Customers --
 
@@ -36,7 +105,7 @@ POST   /customers
   "country": "CZ",
   "paying_vat": "true",
   "vat_prefix": "CZ",
-  "locale": "cs" 
+  "locale": "cs"
 }
 < 201
 < Content-Type: application/json
@@ -54,33 +123,35 @@ POST   /customers
   "country": "CZ",
   "paying_vat": "true",
   "vat_prefix": "CZ",
-  "locale": "cs"
+  "locale": "cs",
+  "id": 1
 }
+
 
 Get list of all customers
 GET /customers
 > Accept: application/json
 < 200
 < Content-Type: application/json
-
-[{
-  "email": "ak@vmin.cz",
-  "legal_name": "ACME ltd",
-  "street": "Mulholand Drive",
-  "number": "13",
-  "address2": "Upthehill quarter",
-  "city": "Cernosice",
-  "invoice_name": "Oh Mc'Donald",
-  "zip": "25228",
-  "ic": "12345678",
-  "vat": "12345678",
-  "country": "CZ",
-  "paying_vat": "true",
-  "vat_prefix": "CZ",
-  "locale": "cs"
-}]
-
-
+[
+  {
+    "email": "ak@vmin.cz",
+    "legal_name": "ACME ltd",
+    "street": "Mulholand Drive",
+    "number": "13",
+    "address2": "Upthehill quarter",
+    "city": "Cernosice",
+    "invoice_name": "Oh Mc'Donald",
+    "zip": "25228",
+    "ic": "12345678",
+    "vat": "12345678",
+    "country": "CZ",
+    "paying_vat": "true",
+    "vat_prefix": "CZ",
+    "locale": "cs",
+    "id": 1
+  }
+]
 
 
 Get detail of specific customer
@@ -89,7 +160,6 @@ GET    /customers/1
 < 200
 < Content-Type: application/json
 {
-  "id": "1",
   "email": "ak@vmin.cz",
   "legal_name": "ACME ltd",
   "street": "Mulholand Drive",
@@ -103,7 +173,8 @@ GET    /customers/1
   "country": "CZ",
   "paying_vat": "true",
   "vat_prefix": "CZ",
-  "locale": "cs"
+  "locale": "cs",
+  "id": 1
 }
 
 
@@ -401,50 +472,40 @@ GET /customers/1/invoices/2012010001.pdf
 
 
 
---- Infrastructure ---
+-- Instance --
 
--- Virtual --
-
-Creates new virtual
-
-Request attributes: 
-
-  - email: Company's billing email contact
-  - vat_prefix: TAX number country prefix
-  
-POST   /customers
+POST   /instances
 > Accept: application/json
 {
-  "email": "ak@vmin.cz",
-  "locale": "cs" 
+  "hostname": "test.dom.tld",
+  "ram": 1024,
+  "storage": 10,
+  "image": "http://imagestore.virtualmaster.cz/images/1",
+  "state": "running",
+  "ipv4_addresses": 1,
+  "ipv6_addresses": 1,
+  "cores": 4,
+  "hypervisor": "xen-paravirt",
+  "cluster_id": 1,
+  "customer_id": 1,
+  "hostnode_id": 1
 }
-
 < 201
 < Content-Type: application/json
 {
-  "vat_prefix": "CZ",
-  "locale": "cs"
+  "hostname": "test.dom.tld",
+  "ram": 1024,
+  "storage": 10,
+  "image": "http://imagestore.virtualmaster.cz/images/1",
+  "state": "running",
+  "ipv4_addresses": 1,
+  "ipv6_addresses": 1,
+  "cores": 4,
+  "hypervisor": "xen-paravirt",
+  "cluster_id": 1,
+  "customer_id": 1,
+  "hostnode_id": 1,
+  "id": 1
 }
 
-Get list of all customers
-GET /customers
-> Accept: application/json
-< 200
-< Content-Type: application/json
 
-[{
-  "email": "ak@vmin.cz",
-  "legal_name": "ACME ltd",
-  "street": "Mulholand Drive",
-  "number": "13",
-  "address2": "Upthehill quarter",
-  "city": "Cernosice",
-  "invoice_name": "Oh Mc'Donald",
-  "zip": "25228",
-  "ic": "12345678",
-  "vat": "12345678",
-  "country": "CZ",
-  "paying_vat": "true",
-  "vat_prefix": "CZ",
-  "locale": "cs"
-}]
