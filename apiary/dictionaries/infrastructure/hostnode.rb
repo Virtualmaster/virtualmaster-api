@@ -8,7 +8,7 @@ module Dictionaries
         ram: 8096,
         cores: 8,
         comment: 'Probably faulty memory',
-        customer_id: 1,
+        tenant_id: 1,
         default_volgroup_id: 1,
         enabled: 'true',
         default_bridge: 'eth0',

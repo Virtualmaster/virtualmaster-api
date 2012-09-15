@@ -3,7 +3,7 @@ module Dictionaries
     def self.not_saved
       {
         hostname: 'test.dom.tld',
-        ram: 1024,
+        memory: 1024,
         storage: 10,
         image: 'http://imagestore.virtualmaster.cz/images/1',
         state: 'running',
@@ -12,7 +12,7 @@ module Dictionaries
         cores: 4,
         hypervisor: 'xen-paravirt',
         cluster_id: 1,
-        customer_id: 1,
+        tenant_id: 1,
         hostnode_id: 1
       }
     end
