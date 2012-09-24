@@ -474,7 +474,7 @@ GET /customers/1/invoices/2012010001.pdf
 
 
 -- Cluster --
-GET   /cluster/1
+GET   /clusters/1
 > Accept: application/json
 < 201
 < Content-Type: application/json
@@ -490,7 +490,7 @@ GET   /cluster/1
 
 
 -- Hostnode --
-GET   /hostnode/1
+GET   /hostnodes/1
 > Accept: application/json
 < 201
 < Content-Type: application/json
@@ -514,7 +514,7 @@ GET   /hostnode/1
 
 
 -- Instance --
-GET   /instance/1
+GET   /instances/1
 > Accept: application/json
 < 201
 < Content-Type: application/json
@@ -538,7 +538,7 @@ GET   /instance/1
 
 
 -- Ip --
-GET   /ip/1
+GET   /ips/1
 > Accept: application/json
 < 201
 < Content-Type: application/json
@@ -559,8 +559,8 @@ GET   /ip/1
 }
 
 
--- Logvolume --
-GET   /logvolume/1
+-- Logvolumes --
+GET   /logvolumes/1
 > Accept: application/json
 < 201
 < Content-Type: application/json
@@ -584,8 +584,8 @@ GET   /logvolume/1
 }
 
 
--- Migration --
-GET   /migration/1
+-- Migrations --
+GET   /migrations/1
 > Accept: application/json
 < 201
 < Content-Type: application/json
@@ -600,8 +600,23 @@ GET   /migration/1
 }
 
 
--- Replication --
-GET   /migration/1
+-- Replication Resourcess --
+GET   /replication_resources/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "replication": {
+    "minor": 221,
+    "hostnode_id": 1,
+    "replication_resource_id": 1
+  },
+  "id": 1
+}
+
+
+-- Subnets --
+GET   /subnets/1
 > Accept: application/json
 < 201
 < Content-Type: application/json
@@ -616,24 +631,8 @@ GET   /migration/1
 }
 
 
--- Subnet --
-GET   /subnet/1
-> Accept: application/json
-< 201
-< Content-Type: application/json
-{
-  "migration": {
-    "instance_id": 1,
-    "target_hostnode_id": 1,
-    "source_hostnode_id": 2,
-    "state": "ready"
-  },
-  "id": 1
-}
-
-
--- Vif --
-GET   /vif/1
+-- Vifs --
+GET   /vifs/1
 > Accept: application/json
 < 201
 < Content-Type: application/json
@@ -647,8 +646,8 @@ GET   /vif/1
 }
 
 
--- Volgroup --
-GET   /volgroup/1
+-- Volgroups --
+GET   /volgroups/1
 > Accept: application/json
 < 201
 < Content-Type: application/json
