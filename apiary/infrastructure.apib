@@ -1,18 +1,80 @@
--- Instance --
 
-POST   /instances
+-- Cluster --
+GET   /cluster/1
 > Accept: application/json
-***** Instance.not_saved
+< 201
+< Content-Type: application/json
+***** Cluster.saved
+
+
+-- Hostnode --
+GET   /hostnode/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+***** Hostnode.saved
+
+
+-- Instance --
+GET   /instance/1
+> Accept: application/json
 < 201
 < Content-Type: application/json
 ***** Instance.saved
 
 
-GET   /instances
+-- Ip --
+GET   /ip/1
 > Accept: application/json
 < 201
 < Content-Type: application/json
-***** Instance.many_saved
+***** Ip.saved
 
 
+-- Logvolume --
+GET   /logvolume/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+***** Logvolume.saved
+
+
+-- Migration --
+GET   /migration/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+***** Migration.saved
+
+
+-- Replication --
+GET   /migration/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+***** Migration.saved
+
+
+-- Subnet --
+GET   /subnet/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+***** Migration.saved
+
+
+-- Vif --
+GET   /vif/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+***** Vif.saved
+
+
+-- Volgroup --
+GET   /volgroup/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+***** Volgroup.saved
 

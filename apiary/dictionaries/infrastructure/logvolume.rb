@@ -1,7 +1,7 @@
 module Dictionaries
   module Logvolume
     def self.not_saved
-      {
+      {logolume:{
         name: 'test-dom-tld_root',
         size: 10,
         fstype: 'ext3',
@@ -15,7 +15,11 @@ module Dictionaries
         comment: 'Do not run fsck!',
         instance_id: 1,
         volgroup_id: 1,
-      }
+      }}
     end
+    def self.saved
+      self.not_saved.merge({id: 1})
+    end
+
   end
 end

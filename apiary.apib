@@ -472,66 +472,56 @@ GET /customers/1/invoices/2012010001.pdf
 
 
 
--- Instance --
 
-POST   /instances
+-- Cluster --
+GET   /cluster/1
 > Accept: application/json
-{
-  "hostname": "test.dom.tld",
-  "ram": 1024,
-  "storage": 10,
-  "image": "http://imagestore.virtualmaster.cz/images/1",
-  "state": "running",
-  "ipv4_addresses": 1,
-  "ipv6_addresses": 1,
-  "cores": 4,
-  "hypervisor": "xen-paravirt",
-  "cluster_id": 1,
-  "customer_id": 1,
-  "hostnode_id": 1
-}
 < 201
 < Content-Type: application/json
 {
-  "hostname": "test.dom.tld",
-  "ram": 1024,
-  "storage": 10,
-  "image": "http://imagestore.virtualmaster.cz/images/1",
-  "state": "running",
-  "ipv4_addresses": 1,
-  "ipv6_addresses": 1,
-  "cores": 4,
-  "hypervisor": "xen-paravirt",
-  "cluster_id": 1,
-  "customer_id": 1,
-  "hostnode_id": 1,
+  "cluster": {
+    "tenant_id": 1,
+    "name": "Virtualaster Prague - locality 1",
+    "realm_name": "vm-prague-1",
+    "public": "true"
+  },
   "id": 1
 }
 
 
-GET   /instances
+-- Hostnode --
+GET   /hostnode/1
 > Accept: application/json
 < 201
 < Content-Type: application/json
-[
-  {
-    "hostname": "test.dom.tld",
-    "ram": 1024,
-    "storage": 10,
-    "image": "http://imagestore.virtualmaster.cz/images/1",
-    "state": "running",
-    "ipv4_addresses": 1,
-    "ipv6_addresses": 1,
-    "cores": 4,
-    "hypervisor": "xen-paravirt",
-    "cluster_id": 1,
-    "customer_id": 1,
-    "hostnode_id": 1,
-    "id": 1
+{
+  "hostnode": {
+    "hostname": "node1.vmin.cz",
+    "private_ip_id": 1,
+    "public_ip_id": 2,
+    "ram": 8096,
+    "cores": 8,
+    "comment": "Probably faulty memory",
+    "tenant_id": 1,
+    "default_volgroup_id": 1,
+    "enabled": "true",
+    "default_bridge": "eth0",
+    "network_security": "true",
+    "cluster_id": 1
   },
-  {
+  "id": 1
+}
+
+
+-- Instance --
+GET   /instance/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "instance": {
     "hostname": "test.dom.tld",
-    "ram": 1024,
+    "memory": 1024,
     "storage": 10,
     "image": "http://imagestore.virtualmaster.cz/images/1",
     "state": "running",
@@ -540,11 +530,135 @@ GET   /instances
     "cores": 4,
     "hypervisor": "xen-paravirt",
     "cluster_id": 1,
-    "customer_id": 1,
-    "hostnode_id": 1,
-    "id": 1
-  }
-]
+    "tenant_id": 1,
+    "hostnode_id": 1
+  },
+  "id": 1
+}
 
 
+-- Ip --
+GET   /ip/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "instance": {
+    "ip": "10.0.0.2",
+    "reverse": "2.0.0.10.in-addr.arpa.",
+    "netmask": "255.255.255.0",
+    "gateway": "10.0.0.1",
+    "purpose": "infrastructure",
+    "comment": "allocated for redundant gateway",
+    "vif_id": 1,
+    "subnet_id": 1,
+    "state": "assigned",
+    "version": 4
+  },
+  "id": 1
+}
+
+
+-- Logvolume --
+GET   /logvolume/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "logolume": {
+    "name": "test-dom-tld_root",
+    "size": 10,
+    "fstype": "ext3",
+    "label": "root",
+    "target": "xvda",
+    "state": "ready",
+    "snapshot_of_id": 1,
+    "replication_resource_id": 1,
+    "migration_id": 1,
+    "meta_for_replication_resource_id": 1,
+    "comment": "Do not run fsck!",
+    "instance_id": 1,
+    "volgroup_id": 1
+  },
+  "id": 1
+}
+
+
+-- Migration --
+GET   /migration/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "migration": {
+    "instance_id": 1,
+    "target_hostnode_id": 1,
+    "source_hostnode_id": 2,
+    "state": "ready"
+  },
+  "id": 1
+}
+
+
+-- Replication --
+GET   /migration/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "migration": {
+    "instance_id": 1,
+    "target_hostnode_id": 1,
+    "source_hostnode_id": 2,
+    "state": "ready"
+  },
+  "id": 1
+}
+
+
+-- Subnet --
+GET   /subnet/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "migration": {
+    "instance_id": 1,
+    "target_hostnode_id": 1,
+    "source_hostnode_id": 2,
+    "state": "ready"
+  },
+  "id": 1
+}
+
+
+-- Vif --
+GET   /vif/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "vif": {
+    "name": "eth0",
+    "mac": "00:00:00:00:00:00",
+    "instance_id": 1
+  },
+  "id": 1
+}
+
+
+-- Volgroup --
+GET   /volgroup/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "volgroup": {
+    "name": "node1_main",
+    "comment": "On top of raid 1+0",
+    "size": "1024",
+    "hostnode_id": 1
+  },
+  "id": 1
+}
 

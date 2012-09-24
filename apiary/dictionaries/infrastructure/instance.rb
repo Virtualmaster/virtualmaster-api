@@ -1,7 +1,7 @@
 module Dictionaries
   module Instance
     def self.not_saved
-      {
+      {instance:{
         hostname: 'test.dom.tld',
         memory: 1024,
         storage: 10,
@@ -14,7 +14,7 @@ module Dictionaries
         cluster_id: 1,
         tenant_id: 1,
         hostnode_id: 1
-      }
+      }}
     end
 
     def self.saved
