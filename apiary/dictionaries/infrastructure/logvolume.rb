@@ -1,7 +1,7 @@
 module Dictionaries
   module Logvolume
     def self.not_saved
-      {logolume:{
+      {logvolume:{
         name: 'test-dom-tld_root',
         size: 10,
         fstype: 'ext3',
@@ -18,7 +18,10 @@ module Dictionaries
       }}
     end
     def self.saved
-      self.not_saved.merge({id: 1})
+      i = self.not_saved
+      module_name = self.to_s.split("::").last.downcase
+      i[module_name.to_sym][:id] = 1
+      i
     end
 
   end
