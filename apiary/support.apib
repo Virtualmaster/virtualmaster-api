@@ -1,0 +1,39 @@
+-- Issue --
+Retreive record with history (chat, state changes, reassignements)
+GET   /issues/1.json?include=journals
+> Accept: application/json
+< 201
+< Content-Type: application/json
+***** Issue.saved_with_journal
+
+
+Retreive all recodrs without journal
+GET   /issues.json
+> Accept: application/json
+< 201
+< Content-Type: application/json
+***** Issue.all_saved
+
+
+Create new Issue
+POST /issue.json
+> Accept: application/json
+***** Issue.new_record
+< 201
+< Content-Type: application/json
+***** Issue.saved
+
+Update Issue
+PUT /issue.json
+> Accept: application/json
+***** Issue.update_record
+< 204
+
+Delete Issue
+Delete /issue.json
+> Accept: application/json
+***** Issue.update_record
+< 204
+
+
+
