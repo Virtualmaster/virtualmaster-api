@@ -65,7 +65,8 @@ Resources:
 - Person
 - Email
 - Phone Number
-- SSH keys
+- SSH Key
+- Authorized Backend
 
 ---
 
@@ -468,6 +469,68 @@ Test comment for apiary
 GET /customers/1/invoices/2012010001.pdf
 < 200
 < Content-Type:application/pdf
+
+
+
+
+-- Authorized Backend --
+Retreive all authorized backends for person
+GET   /person/1/authorized_backends
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "authorized_backends": [
+    {
+      "authorized_backend": {
+        "id": "1",
+        "backend_type": "Support",
+        "person_id": "1",
+        "url": "http://virtualmaster.apiary.io",
+        "credentials": {
+          "username": "netmilk",
+          "password": "1234"
+        }
+      }
+    },
+    {
+      "authorized_backend": {
+        "id": "1",
+        "backend_type": "Billing",
+        "person_id": "1",
+        "url": "http://virtualmaster.apiary.io",
+        "credentials": {
+          "username": "netmilk",
+          "password": "1234"
+        }
+      }
+    },
+    {
+      "authorized_backend": {
+        "id": "1",
+        "backend_type": "Infrastructure",
+        "person_id": "1",
+        "url": "http://virtualmaster.apiary.io",
+        "credentials": {
+          "username": "netmilk",
+          "password": "1234"
+        }
+      }
+    },
+    {
+      "authorized_backend": {
+        "id": "1",
+        "backend_type": "Id",
+        "person_id": "1",
+        "url": "http://virtualmaster.apiary.io",
+        "credentials": {
+          "username": "netmilk",
+          "password": "1234"
+        }
+      }
+    }
+  ]
+}
 
 
 
