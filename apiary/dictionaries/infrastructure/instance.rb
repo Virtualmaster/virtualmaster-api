@@ -1,19 +1,19 @@
 module Dictionaries
   module Instance
     def self.not_saved
-      {instance:{
-        hostname: 'test.dom.tld',
-        memory: 1024,
-        storage: 10,
-        image: 'http://imagestore.virtualmaster.cz/images/1',
-        state: 'running',
-        ipv4_addresses: 1,
-        ipv6_addresses: 1,
-        cores: 4,
-        hypervisor: 'xen-paravirt',
-        cluster_id: 1,
-        tenant_id: 1,
-        hostnode_id: 1
+      { :instance => {
+        :hostname =>'test.dom.tld',
+        :memory => 1024,
+        :storage => 10,
+        :image => 'http://imagestore.virtualmaster.cz/images/1',
+        :state => 'running',
+        :ipv4_addresses => 1,
+        :ipv6_addresses => 1,
+        :cores => 4,
+        :hypervisor => 'xen-paravirt',
+        :cluster_id => 1,
+        :tenant_id => 1,
+        :hostnode_id => 1
       }}
     end
 

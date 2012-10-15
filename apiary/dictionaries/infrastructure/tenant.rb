@@ -1,8 +1,8 @@
 module Dictionaries
   module Tenant
     def self.not_saved
-      {tenant:{
-        name: 'Virtualmaster'
+      {:tenant => {
+        :name => 'Virtualmaster'
       }}
     end
     def self.saved

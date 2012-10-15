@@ -11,10 +11,10 @@ end
 module Dictionaries
   module ReplicationResource
     def self.not_saved
-      {replication_resource:{
-        minor: 221,
-        hostnode_id: 1,
-        replication_resource_id: 1
+      {:replication_resource => {
+        :minor => 221,
+        :hostnode_id => 1,
+        :replication_resource_id => 1
       }}
     end
     def self.saved

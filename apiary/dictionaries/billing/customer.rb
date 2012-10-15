@@ -22,7 +22,7 @@ module Dictionaries
     def self.saved
       Customer.not_saved.merge(
         {
-          id: 1
+          :id => 1
         }
       )
     end
