@@ -42,7 +42,7 @@ Example for dictionary in `./apiary/dictionaries/virtual.rb`:
 
 Usage of dictionary in blueprint:
 
-    ***** Virtual.multiple_saved
+    ***** Virtual.all_saved
 
     
     
