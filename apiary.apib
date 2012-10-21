@@ -70,6 +70,467 @@ Resources:
 
 ---
 
+-- Issue --
+Retreive record with history (chat, state changes, reassignements)
+GET   /issues/1.json?include=journals
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "issue": {
+    "tracker": {
+      "id": 2,
+      "name": "Feature"
+    },
+    "due_date": "2012/09/20",
+    "id": 469,
+    "project": {
+      "id": 65,
+      "name": "Support issue tracker"
+    },
+    "author": {
+      "id": 5,
+      "name": "Adam Kliment"
+    },
+    "created_on": "2012/09/16 14:53:42 +0200",
+    "assigned_to": {
+      "id": 5,
+      "name": "Adam Kliment"
+    },
+    "priority": {
+      "id": 5,
+      "name": "High"
+    },
+    "done_ratio": 0,
+    "subject": "Update redmine.dev.vmin.cz to 1.4+",
+    "fixed_version": {
+      "id": 17,
+      "name": "Dispatching"
+    },
+    "updated_on": "2012/09/17 00:25:14 +0200",
+    "journals": [
+      {
+        "id": 845,
+        "user": {
+          "id": 4,
+          "name": "jan kaufman"
+        },
+        "created_on": "2012/09/16 21:16:02 +0200",
+        "details": [
+          {
+            "new_value": "2",
+            "old_value": "1",
+            "property": "attr",
+            "name": "status_id"
+          },
+          {
+            "new_value": "4",
+            "old_value": "5",
+            "property": "attr",
+            "name": "assigned_to_id"
+          }
+        ],
+        "notes": "Texttual comment\r\nin multiple lines"
+      },
+      {
+        "id": 859,
+        "user": {
+          "id": 4,
+          "name": "jan kaufman"
+        },
+        "created_on": "2012/09/17 00:25:14 +0200",
+        "details": [
+          {
+            "new_value": "3",
+            "old_value": "2",
+            "property": "attr",
+            "name": "status_id"
+          },
+          {
+            "new_value": "5",
+            "old_value": "4",
+            "property": "attr",
+            "name": "assigned_to_id"
+          }
+        ],
+        "notes": "solved at #239\r\n"
+      }
+    ],
+    "start_date": "2012/09/16",
+    "spent_hours": 0.0,
+    "status": {
+      "id": 3,
+      "name": "Resolved"
+    },
+    "description": "Textual description in multiple lines \r\n http://www.redmine.org/projects/redmine/wiki/Rest_api"
+  }
+}
+
+
+Retreive all recodrs without journal
+GET   /issues.json
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "issues": [
+    {
+      "tracker": {
+        "id": 2,
+        "name": "Feature"
+      },
+      "due_date": "2012/09/20",
+      "id": 469,
+      "project": {
+        "id": 65,
+        "name": "Support issue tracker"
+      },
+      "author": {
+        "id": 5,
+        "name": "Adam Kliment"
+      },
+      "created_on": "2012/09/16 14:53:42 +0200",
+      "assigned_to": {
+        "id": 5,
+        "name": "Adam Kliment"
+      },
+      "priority": {
+        "id": 5,
+        "name": "High"
+      },
+      "done_ratio": 0,
+      "subject": "Update redmine.dev.vmin.cz to 1.4+",
+      "fixed_version": {
+        "id": 17,
+        "name": "Dispatching"
+      },
+      "updated_on": "2012/09/17 00:25:14 +0200",
+      "start_date": "2012/09/16",
+      "spent_hours": 0.0,
+      "status": {
+        "id": 3,
+        "name": "Resolved"
+      },
+      "description": "Textual description in multiple lines \r\n http://www.redmine.org/projects/redmine/wiki/Rest_api"
+    },
+    {
+      "tracker": {
+        "id": 2,
+        "name": "Feature"
+      },
+      "due_date": "2012/09/20",
+      "id": 469,
+      "project": {
+        "id": 65,
+        "name": "Support issue tracker"
+      },
+      "author": {
+        "id": 5,
+        "name": "Adam Kliment"
+      },
+      "created_on": "2012/09/16 14:53:42 +0200",
+      "assigned_to": {
+        "id": 5,
+        "name": "Adam Kliment"
+      },
+      "priority": {
+        "id": 5,
+        "name": "High"
+      },
+      "done_ratio": 0,
+      "subject": "Update redmine.dev.vmin.cz to 1.4+",
+      "fixed_version": {
+        "id": 17,
+        "name": "Dispatching"
+      },
+      "updated_on": "2012/09/17 00:25:14 +0200",
+      "start_date": "2012/09/16",
+      "spent_hours": 0.0,
+      "status": {
+        "id": 3,
+        "name": "Resolved"
+      },
+      "description": "Textual description in multiple lines \r\n http://www.redmine.org/projects/redmine/wiki/Rest_api"
+    }
+  ],
+  "total_count": "2",
+  "offset": "0",
+  "limit": "25"
+}
+
+
+Create new Issue
+POST /issue.json
+> Accept: application/json
+{
+  "issue": {
+    "subject": "Update redmine.dev.vmin.cz to 1.4+",
+    "description": "Textual description in multiple lines \r\n http://www.redmine.org/projects/redmine/wiki/Rest_api",
+    "project_id": "example"
+  }
+}
+< 201
+< Content-Type: application/json
+{
+  "issue": {
+    "tracker": {
+      "id": 2,
+      "name": "Feature"
+    },
+    "due_date": "2012/09/20",
+    "id": 469,
+    "project": {
+      "id": 65,
+      "name": "Support issue tracker"
+    },
+    "author": {
+      "id": 5,
+      "name": "Adam Kliment"
+    },
+    "created_on": "2012/09/16 14:53:42 +0200",
+    "assigned_to": {
+      "id": 5,
+      "name": "Adam Kliment"
+    },
+    "priority": {
+      "id": 5,
+      "name": "High"
+    },
+    "done_ratio": 0,
+    "subject": "Update redmine.dev.vmin.cz to 1.4+",
+    "fixed_version": {
+      "id": 17,
+      "name": "Dispatching"
+    },
+    "updated_on": "2012/09/17 00:25:14 +0200",
+    "start_date": "2012/09/16",
+    "spent_hours": 0.0,
+    "status": {
+      "id": 3,
+      "name": "Resolved"
+    },
+    "description": "Textual description in multiple lines \r\n http://www.redmine.org/projects/redmine/wiki/Rest_api"
+  }
+}
+
+
+Update Issue
+PUT /issue.json
+> Accept: application/json
+{
+  "issue": {
+    "notes": "Changing the subject",
+    "subject": "Example issue (was: Test issue)"
+  }
+}
+< 204
+
+
+
+Delete Issue
+DELETE /issue.json
+> Accept: application/json
+{
+  "issue": {
+    "notes": "Changing the subject",
+    "subject": "Example issue (was: Test issue)"
+  }
+}
+< 204
+
+
+
+
+
+
+-- Cluster --
+GET   /clusters/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "cluster": {
+    "public": "true",
+    "tenant_id": 1,
+    "name": "Virtualaster Prague - locality 1",
+    "id": 1,
+    "realm_name": "vm-prague-1"
+  }
+}
+
+
+-- Hostnode --
+GET   /hostnodes/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "hostnode": {
+    "default_volgroup_id": 1,
+    "enabled": "true",
+    "private_ip_id": 1,
+    "default_bridge": "eth0",
+    "public_ip_id": 2,
+    "network_security": "true",
+    "comment": "Probably faulty memory",
+    "hostname": "node1.vmin.cz",
+    "tenant_id": 1,
+    "ram": 8096,
+    "cluster_id": 1,
+    "id": 1,
+    "cores": 8
+  }
+}
+
+
+-- Instance --
+GET   /instances/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "instance": {
+    "hypervisor": "xen-paravirt",
+    "state": "running",
+    "memory": 1024,
+    "hostnode_id": 1,
+    "storage": 10,
+    "image": "http://imagestore.virtualmaster.cz/images/1",
+    "hostname": "test.dom.tld",
+    "tenant_id": 1,
+    "ipv4_addresses": 1,
+    "cluster_id": 1,
+    "id": 1,
+    "cores": 4,
+    "ipv6_addresses": 1
+  }
+}
+
+
+-- Ip --
+GET   /ips/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "ip": {
+    "state": "assigned",
+    "vif_id": 1,
+    "purpose": "infrastructure",
+    "subnet_id": 1,
+    "comment": "allocated for redundant gateway",
+    "ip": "10.0.0.2",
+    "netmask": "255.255.255.0",
+    "reverse": "2.0.0.10.in-addr.arpa.",
+    "id": 1,
+    "version": 4,
+    "gateway": "10.0.0.1"
+  }
+}
+
+
+-- Logvolumes --
+GET   /logvolumes/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "logvolume": {
+    "fstype": "ext3",
+    "replication_resource_id": 1,
+    "state": "ready",
+    "target": "xvda",
+    "label": "root",
+    "snapshot_of_id": 1,
+    "comment": "Do not run fsck!",
+    "migration_id": 1,
+    "size": 10,
+    "meta_for_replication_resource_id": 1,
+    "name": "test-dom-tld_root",
+    "id": 1,
+    "instance_id": 1,
+    "volgroup_id": 1
+  }
+}
+
+
+-- Migrations --
+GET   /migrations/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "migration": {
+    "target_hostnode_id": 1,
+    "state": "ready",
+    "source_hostnode_id": 2,
+    "id": 1,
+    "instance_id": 1
+  }
+}
+
+
+-- Replication Resources --
+GET   /replication_resources/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "replication_resource": {
+    "replication_resource_id": 1,
+    "hostnode_id": 1,
+    "id": 1,
+    "minor": 221
+  }
+}
+
+
+-- Subnets --
+GET   /subnets/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "migration": {
+    "target_hostnode_id": 1,
+    "state": "ready",
+    "source_hostnode_id": 2,
+    "id": 1,
+    "instance_id": 1
+  }
+}
+
+
+-- Vifs --
+GET   /vifs/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "vif": {
+    "mac": "00:00:00:00:00:00",
+    "name": "eth0",
+    "id": 1,
+    "instance_id": 1
+  }
+}
+
+
+-- Volgroups --
+GET   /volgroups/1
+> Accept: application/json
+< 201
+< Content-Type: application/json
+{
+  "volgroup": {
+    "hostnode_id": 1,
+    "comment": "On top of raid 1+0",
+    "size": "1024",
+    "name": "node1_main",
+    "id": 1
+  }
+}
+
 -- Customers --
 
 Creates new customer
@@ -93,39 +554,43 @@ Request attributes:
 POST   /customers
 > Accept: application/json
 {
-  "email": "ak@vmin.cz",
-  "legal_name": "ACME ltd",
-  "street": "Mulholand Drive",
-  "number": "13",
-  "address2": "Upthehill quarter",
-  "city": "Cernosice",
-  "invoice_name": "Oh Mc'Donald",
-  "zip": "25228",
-  "ic": "12345678",
-  "vat": "12345678",
-  "country": "CZ",
-  "paying_vat": "true",
-  "vat_prefix": "CZ",
-  "locale": "cs"
+  "customer": {
+    "country": "CZ",
+    "address2": "Upthehill quarter",
+    "paying_vat": "true",
+    "city": "Cernosice",
+    "vat_prefix": "CZ",
+    "zip": "25228",
+    "invoice_name": "Oh Mc'Donald",
+    "locale": "cs",
+    "legal_name": "ACME ltd",
+    "ic": "12345678",
+    "street": "Mulholand Drive",
+    "vat": "12345678",
+    "email": "ak@vmin.cz",
+    "number": "13"
+  }
 }
 < 201
 < Content-Type: application/json
 {
-  "email": "ak@vmin.cz",
-  "legal_name": "ACME ltd",
-  "street": "Mulholand Drive",
-  "number": "13",
-  "address2": "Upthehill quarter",
-  "city": "Cernosice",
-  "invoice_name": "Oh Mc'Donald",
-  "zip": "25228",
-  "ic": "12345678",
-  "vat": "12345678",
-  "country": "CZ",
-  "paying_vat": "true",
-  "vat_prefix": "CZ",
-  "locale": "cs",
-  "id": 1
+  "customer": {
+    "country": "CZ",
+    "address2": "Upthehill quarter",
+    "paying_vat": "true",
+    "city": "Cernosice",
+    "vat_prefix": "CZ",
+    "zip": "25228",
+    "invoice_name": "Oh Mc'Donald",
+    "locale": "cs",
+    "legal_name": "ACME ltd",
+    "ic": "12345678",
+    "street": "Mulholand Drive",
+    "id": 1,
+    "vat": "12345678",
+    "email": "ak@vmin.cz",
+    "number": "13"
+  }
 }
 
 
@@ -136,21 +601,23 @@ GET /customers
 < Content-Type: application/json
 [
   {
-    "email": "ak@vmin.cz",
-    "legal_name": "ACME ltd",
-    "street": "Mulholand Drive",
-    "number": "13",
-    "address2": "Upthehill quarter",
-    "city": "Cernosice",
-    "invoice_name": "Oh Mc'Donald",
-    "zip": "25228",
-    "ic": "12345678",
-    "vat": "12345678",
-    "country": "CZ",
-    "paying_vat": "true",
-    "vat_prefix": "CZ",
-    "locale": "cs",
-    "id": 1
+    "customer": {
+      "country": "CZ",
+      "address2": "Upthehill quarter",
+      "paying_vat": "true",
+      "city": "Cernosice",
+      "vat_prefix": "CZ",
+      "zip": "25228",
+      "invoice_name": "Oh Mc'Donald",
+      "locale": "cs",
+      "legal_name": "ACME ltd",
+      "ic": "12345678",
+      "street": "Mulholand Drive",
+      "id": 1,
+      "vat": "12345678",
+      "email": "ak@vmin.cz",
+      "number": "13"
+    }
   }
 ]
 
@@ -161,21 +628,23 @@ GET    /customers/1
 < 200
 < Content-Type: application/json
 {
-  "email": "ak@vmin.cz",
-  "legal_name": "ACME ltd",
-  "street": "Mulholand Drive",
-  "number": "13",
-  "address2": "Upthehill quarter",
-  "city": "Cernosice",
-  "invoice_name": "Oh Mc'Donald",
-  "zip": "25228",
-  "ic": "12345678",
-  "vat": "12345678",
-  "country": "CZ",
-  "paying_vat": "true",
-  "vat_prefix": "CZ",
-  "locale": "cs",
-  "id": 1
+  "customer": {
+    "country": "CZ",
+    "address2": "Upthehill quarter",
+    "paying_vat": "true",
+    "city": "Cernosice",
+    "vat_prefix": "CZ",
+    "zip": "25228",
+    "invoice_name": "Oh Mc'Donald",
+    "locale": "cs",
+    "legal_name": "ACME ltd",
+    "ic": "12345678",
+    "street": "Mulholand Drive",
+    "id": 1,
+    "vat": "12345678",
+    "email": "ak@vmin.cz",
+    "number": "13"
+  }
 }
 
 
@@ -209,26 +678,32 @@ Attributes:
 - service_attributes: JSON with serialized service attribtues
 
 POST /customers/1/service_instances
-> Accept: application/json
 {
-    "identificator": "virtual-1",
-    "price": "1.5",
-    "currency": "CZK",
+  "service_instance": {
     "service_attributes": {
-        "volume": "3"
-    }
+      "volume": 3
+    },
+    "identificator": "virtual-1",
+    "price": 1.5,
+    "version": 1,
+    "currency": "CZK",
+    "id": 1
+  }
 }
 < 201
 < Content-Type: application/json
 {
-    "id": "1",
-    "identificator": "virtual-1",
-    "price": "1.5",
-    "currency": "CZK",
+  "service_instance": {
     "service_attributes": {
-        "volume": "3"
+      "volume": 3
     },
-    "version": "1"
+    "identificator": "virtual-1",
+    "price": 1.5,
+    "version": 1,
+    "currency": "CZK",
+    "id": 1,
+    "customer_id": 1
+  }
 }
 
 Get all existing service instances for the customer
@@ -238,16 +713,19 @@ GET /customers/1/service_instances
 < 200
 < Content-Type: application/json
 [
-{
-    "id": "1",
-    "identificator": "virtual-1",
-    "price": "1.5",
-    "currency": "CZK",
-    "service_attributes": {
-        "volume": "3"
-    },
-    "version": "1"
-}
+  {
+    "service_instance": {
+      "service_attributes": {
+        "volume": 3
+      },
+      "identificator": "virtual-1",
+      "price": 1.5,
+      "version": 1,
+      "currency": "CZK",
+      "id": 1,
+      "customer_id": 1
+    }
+  }
 ]
 
 Get detail of existing service instance
@@ -257,14 +735,17 @@ GET /customers/1/service_instances/1
 < 200
 < Content-Type: application/json
 {
-    "id": "1",
-    "identificator": "virtual-1",
-    "price": "1.5",
-    "currency": "CZK",
+  "service_instance": {
     "service_attributes": {
-        "volume": "3"
+      "volume": 3
     },
-    "version": "1"
+    "identificator": "virtual-1",
+    "price": 1.5,
+    "version": 1,
+    "currency": "CZK",
+    "id": 1,
+    "customer_id": 1
+  }
 }
 
 
@@ -307,31 +788,35 @@ Attributes:
 POST /customers/1/service_invoice_items
 > Accept: application/json
 {
+  "service_invoice_item": {
+    "discount": 0,
     "desc": "Item description",
-    "quantity": "10",
-    "unitprice": "1",
-    "discount": "0",
-    "tax": "20",
+    "tax": 20,
     "note": "Item note",
+    "started_at": "2012-08-1T00:01:01+02:00",
     "code": "service",
-    "started_at" "2012-08-1T00:01:01+02:00",
-    "ended_at":  "2012-08-1T00:11:01+02:00",
+    "quantity": 10,
+    "ended_at": "2012-08-1T00:11:01+02:00",
+    "unitprice": 1
+  }
 }
 < 201
 < Content-Type: application/json
 {
-    "id": "1",
+  "service_invoice_item": {
+    "discount": 0,
     "desc": "Item description",
-    "quantity": "10",
-    "unitprice": "1",
-    "discount": "0",
-    "tax": "20",
+    "tax": 20,
     "note": "Item note",
+    "started_at": "2012-08-1T00:01:01+02:00",
     "code": "service",
-    "started_at" "2012-08-1T00:01:01+02:00",
-    "ended_at":  "2012-08-1T00:11:01+02:00",
+    "quantity": 10,
+    "ended_at": "2012-08-1T00:11:01+02:00",
+    "id": 1,
+    "unitprice": 1,
+    "customer_id": 1
+  }
 }
-
 
 
 Get all customer's invoice items
@@ -339,20 +824,21 @@ GET /customers/1/service_invoice_items
 > Accept: application/json
 < 200
 < Content-Type: application/json
-[
 {
-    "id": "1",
+  "service_invoice_item": {
+    "discount": 0,
     "desc": "Item description",
-    "quantity": "10",
-    "unitprice": "1",
-    "discount": "0",
-    "tax": "20",
+    "tax": 20,
     "note": "Item note",
+    "started_at": "2012-08-1T00:01:01+02:00",
     "code": "service",
-    "started_at" "2012-08-1T00:01:01+02:00",
-    "ended_at":  "2012-08-1T00:11:01+02:00",
+    "quantity": 10,
+    "ended_at": "2012-08-1T00:11:01+02:00",
+    "id": 1,
+    "unitprice": 1,
+    "customer_id": 1
+  }
 }
-]
 
 
 Get specific invoice item
@@ -360,18 +846,23 @@ GET /customers/1/service_invoice_items/1
 > Accept: application/json
 < 200
 < Content-Type: application/json
-{
-    "id": "1",
-    "desc": "Item description",
-    "quantity": "10",
-    "unitprice": "1",
-    "discount": "0",
-    "tax": "20",
-    "note": "Item note",
-    "code": "service",
-    "started_at" "2012-08-1T00:01:01+02:00",
-    "ended_at":  "2012-08-1T00:11:01+02:00",
-}
+[
+  {
+    "service_invoice_item": {
+      "discount": 0,
+      "desc": "Item description",
+      "tax": 20,
+      "note": "Item note",
+      "started_at": "2012-08-1T00:01:01+02:00",
+      "code": "service",
+      "quantity": 10,
+      "ended_at": "2012-08-1T00:11:01+02:00",
+      "id": 1,
+      "unitprice": 1,
+      "customer_id": 1
+    }
+  }
+]
 
 
 Update specifc invoice item
@@ -398,42 +889,46 @@ GET /customers/1/invoices
 < 200
 < Content-Type: application/json
 [
-{
-    "customer_id": "1",
-    "number": "2012010001",
-    "issued_at": "2012-01-01",
-    "due_at": "2012-01-15",
-    "fulfillment_at": "2011-12-31",
-    "issued_by": "TinTin MacGyver",
-    "payment_type": "bank_transfer",
-    "rounding": "0",
-    "state": "paid",
-    "type": "ServiceInvoice",
-    "tax_rate": "20",
-    "price_total": "2200",
-    "language": "cs",
-    "vs": "2012010001",
-    "currency": "CZK",
-    "tax_mode": "czech"
-},
-{
-    "customer_id": "1",
-    "number": "2012010001",
-    "issued_at": "2012-01-01",
-    "due_at": "2012-01-15",
-    "fulfillment_at": "2011-12-31",
-    "issued_by": "TinTin MacGyver",
-    "payment_type": "bank_transfer",
-    "rounding": "0",
-    "state": "paid",
-    "type": "CreditInvoice",
-    "tax_rate": "20",
-    "price_total": "5000",
-    "language": "cs",
-    "vs": "2012010001",
-    "currency": "CZK",
-    "tax_mode": "czech"
-}
+  {
+    "invoice": {
+      "price_total": 2200,
+      "type": "ServiceInvoice",
+      "state": "paid",
+      "fulfillment_at": "2011-12-31",
+      "language": "cs",
+      "issued_by": "TinTin MacGyver",
+      "tax_mode": "czech",
+      "payment_type": "bank_transfer",
+      "rounding": 0,
+      "issued_at": "2012-01-01",
+      "currency": "CZK",
+      "tax_rate": 20,
+      "vs": "2012010001",
+      "due_at": "2012-01-15",
+      "number": "2012010001",
+      "customer_id": 1
+    }
+  },
+  {
+    "invoice": {
+      "price_total": 2200,
+      "type": "ServiceInvoice",
+      "state": "paid",
+      "fulfillment_at": "2011-12-31",
+      "language": "cs",
+      "issued_by": "TinTin MacGyver",
+      "tax_mode": "czech",
+      "payment_type": "bank_transfer",
+      "rounding": 0,
+      "issued_at": "2012-01-01",
+      "currency": "CZK",
+      "tax_rate": 20,
+      "vs": "2012010001",
+      "due_at": "2012-01-15",
+      "number": "2012010001",
+      "customer_id": 1
+    }
+  }
 ]
 
 
@@ -444,22 +939,24 @@ GET /customers/1/invoices/2012010001
 < 200
 < Content-Type: application/json
 {
-    "customer_id": "1",
-    "number": "2012010001",
-    "issued_at": "2012-01-01",
-    "due_at": "2012-01-15",
-    "fulfillment_at": "2011-12-31",
-    "issued_by": "TinTin MacGyver",
-    "payment_type": "bank_transfer",
-    "rounding": "0",
-    "state": "paid",
+  "invoice": {
+    "price_total": 2200,
     "type": "ServiceInvoice",
-    "tax_rate": "20",
-    "price_total": "2200",
+    "state": "paid",
+    "fulfillment_at": "2011-12-31",
     "language": "cs",
-    "vs": "2012010001",
+    "issued_by": "TinTin MacGyver",
+    "tax_mode": "czech",
+    "payment_type": "bank_transfer",
+    "rounding": 0,
+    "issued_at": "2012-01-01",
     "currency": "CZK",
-    "tax_mode": "czech"
+    "tax_rate": 20,
+    "vs": "2012010001",
+    "due_at": "2012-01-15",
+    "number": "2012010001",
+    "customer_id": 1
+  }
 }
 
 
@@ -483,10 +980,10 @@ GET   /persons/1/authorized_backends
   "authorized_backends": [
     {
       "authorized_backend": {
+        "person_id": "1",
         "id": "1",
+        "url": "http://virtualmaster.apiary.io",
         "backend_type": "Support",
-        "person_id": "1",
-        "url": "http://virtualmaster.apiary.io",
         "credentials": {
           "username": "netmilk",
           "password": "1234"
@@ -495,10 +992,10 @@ GET   /persons/1/authorized_backends
     },
     {
       "authorized_backend": {
+        "person_id": "1",
         "id": "1",
+        "url": "http://virtualmaster.apiary.io",
         "backend_type": "Billing",
-        "person_id": "1",
-        "url": "http://virtualmaster.apiary.io",
         "credentials": {
           "username": "netmilk",
           "password": "1234"
@@ -507,10 +1004,10 @@ GET   /persons/1/authorized_backends
     },
     {
       "authorized_backend": {
+        "person_id": "1",
         "id": "1",
+        "url": "http://virtualmaster.apiary.io",
         "backend_type": "Infrastructure",
-        "person_id": "1",
-        "url": "http://virtualmaster.apiary.io",
         "credentials": {
           "username": "netmilk",
           "password": "1234"
@@ -519,10 +1016,10 @@ GET   /persons/1/authorized_backends
     },
     {
       "authorized_backend": {
-        "id": "1",
-        "backend_type": "Id",
         "person_id": "1",
+        "id": "1",
         "url": "http://virtualmaster.apiary.io",
+        "backend_type": "Id",
         "credentials": {
           "username": "netmilk",
           "password": "1234"
@@ -531,467 +1028,6 @@ GET   /persons/1/authorized_backends
     }
   ]
 }
-
-
-
-
-
--- Cluster --
-GET   /clusters/1
-> Accept: application/json
-< 201
-< Content-Type: application/json
-{
-  "cluster": {
-    "tenant_id": 1,
-    "name": "Virtualaster Prague - locality 1",
-    "realm_name": "vm-prague-1",
-    "public": "true",
-    "id": 1
-  }
-}
-
-
--- Hostnode --
-GET   /hostnodes/1
-> Accept: application/json
-< 201
-< Content-Type: application/json
-{
-  "hostnode": {
-    "hostname": "node1.vmin.cz",
-    "private_ip_id": 1,
-    "public_ip_id": 2,
-    "ram": 8096,
-    "cores": 8,
-    "comment": "Probably faulty memory",
-    "tenant_id": 1,
-    "default_volgroup_id": 1,
-    "enabled": "true",
-    "default_bridge": "eth0",
-    "network_security": "true",
-    "cluster_id": 1,
-    "id": 1
-  }
-}
-
-
--- Instance --
-GET   /instances/1
-> Accept: application/json
-< 201
-< Content-Type: application/json
-{
-  "instance": {
-    "hostname": "test.dom.tld",
-    "memory": 1024,
-    "storage": 10,
-    "image": "http://imagestore.virtualmaster.cz/images/1",
-    "state": "running",
-    "ipv4_addresses": 1,
-    "ipv6_addresses": 1,
-    "cores": 4,
-    "hypervisor": "xen-paravirt",
-    "cluster_id": 1,
-    "tenant_id": 1,
-    "hostnode_id": 1,
-    "id": 1
-  }
-}
-
-
--- Ip --
-GET   /ips/1
-> Accept: application/json
-< 201
-< Content-Type: application/json
-{
-  "ip": {
-    "ip": "10.0.0.2",
-    "reverse": "2.0.0.10.in-addr.arpa.",
-    "netmask": "255.255.255.0",
-    "gateway": "10.0.0.1",
-    "purpose": "infrastructure",
-    "comment": "allocated for redundant gateway",
-    "vif_id": 1,
-    "subnet_id": 1,
-    "state": "assigned",
-    "version": 4,
-    "id": 1
-  }
-}
-
-
--- Logvolumes --
-GET   /logvolumes/1
-> Accept: application/json
-< 201
-< Content-Type: application/json
-{
-  "logvolume": {
-    "name": "test-dom-tld_root",
-    "size": 10,
-    "fstype": "ext3",
-    "label": "root",
-    "target": "xvda",
-    "state": "ready",
-    "snapshot_of_id": 1,
-    "replication_resource_id": 1,
-    "migration_id": 1,
-    "meta_for_replication_resource_id": 1,
-    "comment": "Do not run fsck!",
-    "instance_id": 1,
-    "volgroup_id": 1,
-    "id": 1
-  }
-}
-
-
--- Migrations --
-GET   /migrations/1
-> Accept: application/json
-< 201
-< Content-Type: application/json
-{
-  "migration": {
-    "instance_id": 1,
-    "target_hostnode_id": 1,
-    "source_hostnode_id": 2,
-    "state": "ready",
-    "id": 1
-  }
-}
-
-
--- Replication Resources --
-GET   /replication_resources/1
-> Accept: application/json
-< 201
-< Content-Type: application/json
-{
-  "replication_resource": {
-    "minor": 221,
-    "hostnode_id": 1,
-    "replication_resource_id": 1,
-    "id": 1
-  }
-}
-
-
--- Subnets --
-GET   /subnets/1
-> Accept: application/json
-< 201
-< Content-Type: application/json
-{
-  "migration": {
-    "instance_id": 1,
-    "target_hostnode_id": 1,
-    "source_hostnode_id": 2,
-    "state": "ready",
-    "id": 1
-  }
-}
-
-
--- Vifs --
-GET   /vifs/1
-> Accept: application/json
-< 201
-< Content-Type: application/json
-{
-  "vif": {
-    "name": "eth0",
-    "mac": "00:00:00:00:00:00",
-    "instance_id": 1,
-    "id": 1
-  }
-}
-
-
--- Volgroups --
-GET   /volgroups/1
-> Accept: application/json
-< 201
-< Content-Type: application/json
-{
-  "volgroup": {
-    "name": "node1_main",
-    "comment": "On top of raid 1+0",
-    "size": "1024",
-    "hostnode_id": 1,
-    "id": 1
-  }
-}
-
--- Issue --
-Retreive record with history (chat, state changes, reassignements)
-GET   /issues/1.json?include=journals
-> Accept: application/json
-< 201
-< Content-Type: application/json
-{
-  "issue": {
-    "created_on": "2012/09/16 14:53:42 +0200",
-    "description": "Textual description in multiple lines \r\n http://www.redmine.org/projects/redmine/wiki/Rest_api",
-    "status": {
-      "name": "Resolved",
-      "id": 3
-    },
-    "subject": "Update redmine.dev.vmin.cz to 1.4+",
-    "spent_hours": 0.0,
-    "author": {
-      "name": "Adam Kliment",
-      "id": 5
-    },
-    "assigned_to": {
-      "name": "Adam Kliment",
-      "id": 5
-    },
-    "done_ratio": 0,
-    "tracker": {
-      "name": "Feature",
-      "id": 2
-    },
-    "start_date": "2012/09/16",
-    "project": {
-      "name": "Support issue tracker",
-      "id": 65
-    },
-    "journals": [
-      {
-        "created_on": "2012/09/16 21:16:02 +0200",
-        "notes": "Texttual comment\r\nin multiple lines",
-        "details": [
-          {
-            "old_value": "1",
-            "name": "status_id",
-            "property": "attr",
-            "new_value": "2"
-          },
-          {
-            "old_value": "5",
-            "name": "assigned_to_id",
-            "property": "attr",
-            "new_value": "4"
-          }
-        ],
-        "user": {
-          "name": "jan kaufman",
-          "id": 4
-        },
-        "id": 845
-      },
-      {
-        "created_on": "2012/09/17 00:25:14 +0200",
-        "notes": "solved at #239\r\n",
-        "details": [
-          {
-            "old_value": "2",
-            "name": "status_id",
-            "property": "attr",
-            "new_value": "3"
-          },
-          {
-            "old_value": "4",
-            "name": "assigned_to_id",
-            "property": "attr",
-            "new_value": "5"
-          }
-        ],
-        "user": {
-          "name": "jan kaufman",
-          "id": 4
-        },
-        "id": 859
-      }
-    ],
-    "updated_on": "2012/09/17 00:25:14 +0200",
-    "id": 469,
-    "due_date": "2012/09/20",
-    "fixed_version": {
-      "name": "Dispatching",
-      "id": 17
-    },
-    "priority": {
-      "name": "High",
-      "id": 5
-    }
-  }
-}
-
-
-Retreive all recodrs without journal
-GET   /issues.json
-> Accept: application/json
-< 201
-< Content-Type: application/json
-{
-  "limit": "25",
-  "total_count": "2",
-  "offset": "0",
-  "issues": [
-    {
-      "created_on": "2012/09/16 14:53:42 +0200",
-      "description": "Textual description in multiple lines \r\n http://www.redmine.org/projects/redmine/wiki/Rest_api",
-      "status": {
-        "name": "Resolved",
-        "id": 3
-      },
-      "subject": "Update redmine.dev.vmin.cz to 1.4+",
-      "spent_hours": 0.0,
-      "author": {
-        "name": "Adam Kliment",
-        "id": 5
-      },
-      "assigned_to": {
-        "name": "Adam Kliment",
-        "id": 5
-      },
-      "done_ratio": 0,
-      "tracker": {
-        "name": "Feature",
-        "id": 2
-      },
-      "start_date": "2012/09/16",
-      "project": {
-        "name": "Support issue tracker",
-        "id": 65
-      },
-      "updated_on": "2012/09/17 00:25:14 +0200",
-      "id": 469,
-      "due_date": "2012/09/20",
-      "fixed_version": {
-        "name": "Dispatching",
-        "id": 17
-      },
-      "priority": {
-        "name": "High",
-        "id": 5
-      }
-    },
-    {
-      "created_on": "2012/09/16 14:53:42 +0200",
-      "description": "Textual description in multiple lines \r\n http://www.redmine.org/projects/redmine/wiki/Rest_api",
-      "status": {
-        "name": "Resolved",
-        "id": 3
-      },
-      "subject": "Update redmine.dev.vmin.cz to 1.4+",
-      "spent_hours": 0.0,
-      "author": {
-        "name": "Adam Kliment",
-        "id": 5
-      },
-      "assigned_to": {
-        "name": "Adam Kliment",
-        "id": 5
-      },
-      "done_ratio": 0,
-      "tracker": {
-        "name": "Feature",
-        "id": 2
-      },
-      "start_date": "2012/09/16",
-      "project": {
-        "name": "Support issue tracker",
-        "id": 65
-      },
-      "updated_on": "2012/09/17 00:25:14 +0200",
-      "id": 469,
-      "due_date": "2012/09/20",
-      "fixed_version": {
-        "name": "Dispatching",
-        "id": 17
-      },
-      "priority": {
-        "name": "High",
-        "id": 5
-      }
-    }
-  ]
-}
-
-
-Create new Issue
-POST /issue.json
-> Accept: application/json
-{
-  "issue": {
-    "project_id": "example",
-    "subject": "Update redmine.dev.vmin.cz to 1.4+",
-    "description": "Textual description in multiple lines \r\n http://www.redmine.org/projects/redmine/wiki/Rest_api"
-  }
-}
-< 201
-< Content-Type: application/json
-{
-  "issue": {
-    "created_on": "2012/09/16 14:53:42 +0200",
-    "description": "Textual description in multiple lines \r\n http://www.redmine.org/projects/redmine/wiki/Rest_api",
-    "status": {
-      "name": "Resolved",
-      "id": 3
-    },
-    "subject": "Update redmine.dev.vmin.cz to 1.4+",
-    "spent_hours": 0.0,
-    "author": {
-      "name": "Adam Kliment",
-      "id": 5
-    },
-    "assigned_to": {
-      "name": "Adam Kliment",
-      "id": 5
-    },
-    "done_ratio": 0,
-    "tracker": {
-      "name": "Feature",
-      "id": 2
-    },
-    "start_date": "2012/09/16",
-    "project": {
-      "name": "Support issue tracker",
-      "id": 65
-    },
-    "updated_on": "2012/09/17 00:25:14 +0200",
-    "id": 469,
-    "due_date": "2012/09/20",
-    "fixed_version": {
-      "name": "Dispatching",
-      "id": 17
-    },
-    "priority": {
-      "name": "High",
-      "id": 5
-    }
-  }
-}
-
-
-Update Issue
-PUT /issue.json
-> Accept: application/json
-{
-  "issue": {
-    "subject": "Example issue (was: Test issue)",
-    "notes": "Changing the subject"
-  }
-}
-< 204
-
-
-
-Delete Issue
-DELETE /issue.json
-> Accept: application/json
-{
-  "issue": {
-    "subject": "Example issue (was: Test issue)",
-    "notes": "Changing the subject"
-  }
-}
-< 204
-
 
 
 
