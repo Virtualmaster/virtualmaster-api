@@ -1,15 +1,10 @@
-class String
-  def underscore
-    self.gsub(/::/, '/').
-    gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-    gsub(/([a-z\d])([A-Z])/,'\1_\2').
-    tr("-", "_").
-    downcase
-  end
-end
-
 module Dictionaries
   module ServiceInvoiceItem
+
+    def self.module_name
+      self.to_s.split("::").last.underscore.to_sym
+    end
+
     def self.not_saved
       {:service_invoice_item => {
           :desc => "Item description",
@@ -20,20 +15,21 @@ module Dictionaries
           :note => "Item note",
           :code => "service",
           :started_at => "2012-08-1T00:01:01+02:00",
-          :ended_at => "2012-08-1T00:11:01+02:00"
+          :ended_at => "2012-08-1T00:11:01+02:00",
+          :code => "discount",
+          :currency => "czk"
       }}
     end
 
     def self.saved
       i = self.not_saved
-      module_name = self.to_s.split("::").last.underscore
-      i[module_name.to_sym][:id] = 1
-      i[module_name.to_sym][:customer_id] = 1
+      i[self.module_name][:id] = 1
+      i[self.module_name][:customer_id] = 1
       i
     end
         
     def self.all_saved
-      [ServiceInvoiceItem.saved]
+      [self.saved]
     end
   end
 end
