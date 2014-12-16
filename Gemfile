@@ -1,6 +1,4 @@
-# A sample Gemfile
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem 'json'
-gem 'apiaryio', :git => 'https://github.com/Virtualmaster/apiary-client.git'
-gem 'rake'
+gem 'json', '1.8.1'
+gem 'apiaryio'

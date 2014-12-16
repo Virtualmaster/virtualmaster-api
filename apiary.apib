@@ -5,10 +5,17 @@ FORMAT: 1A
 
 ## Images Collection [/deltacloud_api/images]
 
-
 ### Retrieve images [GET]
 
++ Request
+  - Headers
+    
+      ```
+      Accept: application/json
+      ```
+
 + Response 200
+
   ```
   {
     images: {
@@ -35,9 +42,21 @@ FORMAT: 1A
 
 ## Image member [/deltacloud_api/images/{id}]
 
++ Parameters
+ - id (number, `65`)
+
 ### Retrieve image [GET]
 
+
++ Request
+  - Headers
+    
+      ```
+      Accept: application/json
+      ```
+
 + Response 200
+
   ```
   {
     "name":"CentOS 5.4",
