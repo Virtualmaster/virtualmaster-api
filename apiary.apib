@@ -355,55 +355,197 @@ FORMAT: 1A
   ```
   {
     "instances":{
-      "instance":{
-        "actions":{
-          "link":[
-            {
-              "rel":"start",
-              "method":"post",
-              "href":"http://vm-dev/services/deltacloud/instances/704/start"
-            },
-            {
-              "rel":"stop",
-              "method":"post",
-              "href":"http://vm-dev/services/deltacloud/instances/704/stop"
-            },
-            {
-              "rel":"reboot",
-              "method":"post",
-              "href":"http://vm-dev/services/deltacloud/instances/704/reboot"
-            },
-            {
-              "rel":"shutdown",
-              "method":"post",
-              "href":"http://vm-dev/services/deltacloud/instances/704/shutdown"
-            },
-            {
-              "rel":"destroy",
-              "method":"post",
-              "href":"http://vm-dev/services/deltacloud/instances/704/destroy"
-            }
-          ]
+      "instance":[
+        {
+          "public_addresses":"\n    ",
+          "name":"for-testing-2",
+          "hardware_profile":{
+            "href":"http://vm-dev/services/deltacloud/hardware_profiles/virtual-704",
+            "id":"virtual-704"
+          },
+          "href":"http://vm-dev/services/deltacloud/instances/704",
+          "private_addresses":null,
+          "actions":{
+            "link":[
+              {
+                "rel":"start",
+                "href":"http://vm-dev/services/deltacloud/instances/704/start",
+                "method":"post"
+              },
+              {
+                "rel":"stop",
+                "href":"http://vm-dev/services/deltacloud/instances/704/stop",
+                "method":"post"
+              },
+              {
+                "rel":"reboot",
+                "href":"http://vm-dev/services/deltacloud/instances/704/reboot",
+                "method":"post"
+              },
+              {
+                "rel":"shutdown",
+                "href":"http://vm-dev/services/deltacloud/instances/704/shutdown",
+                "method":"post"
+              },
+              {
+                "rel":"destroy",
+                "href":"http://vm-dev/services/deltacloud/instances/704/destroy",
+                "method":"post"
+              }
+            ]
+          },
+          "state":"STOPPED",
+          "realm":{
+            "href":"http://vm-dev/services/deltacloud/realms/vm-prague-l1",
+            "id":"vm-prague-l1"
+          },
+          "id":"704",
+          "owner_id":"322",
+          "image":{
+            "href":"http://vm-dev/services/deltacloud/images/1",
+            "id":"1"
+          }
         },
-        "public_addresses":"\n    ",
-        "private_addresses":null,
-        "hardware_profile":{
-          "id":"virtual-704",
-          "href":"http://vm-dev/services/deltacloud/hardware_profiles/virtual-704"
+        {
+          "public_addresses":"\n    ",
+          "name":"production",
+          "hardware_profile":{
+            "href":"http://vm-dev/services/deltacloud/hardware_profiles/virtual-902",
+            "id":"virtual-902"
+          },
+          "href":"http://vm-dev/services/deltacloud/instances/902",
+          "private_addresses":null,
+          "actions":{
+            "link":[
+              {
+                "rel":"start",
+                "href":"http://vm-dev/services/deltacloud/instances/902/start",
+                "method":"post"
+              },
+              {
+                "rel":"stop",
+                "href":"http://vm-dev/services/deltacloud/instances/902/stop",
+                "method":"post"
+              },
+              {
+                "rel":"reboot",
+                "href":"http://vm-dev/services/deltacloud/instances/902/reboot",
+                "method":"post"
+              },
+              {
+                "rel":"shutdown",
+                "href":"http://vm-dev/services/deltacloud/instances/902/shutdown",
+                "method":"post"
+              },
+              {
+                "rel":"destroy",
+                "href":"http://vm-dev/services/deltacloud/instances/902/destroy",
+                "method":"post"
+              }
+            ]
+          },
+          "state":"PENDING",
+          "realm":{
+            "href":"http://vm-dev/services/deltacloud/realms/vm-prague-l1",
+            "id":"vm-prague-l1"
+          },
+          "id":"902",
+          "owner_id":"322",
+          "image":{
+            "href":"http://vm-dev/services/deltacloud/images/1",
+            "id":"1"
+          }
+        }
+      ]
+    }
+  }
+  ```
+
+
+### Create instance [POST]
+
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      Content-Type: application/json
+      ```
+
+  - Body
+
+      ```
+      {
+        "image_id": "1",
+        "realm_id": "vm-prague-l1-l1",
+        "cpu": "1",
+        "memory": "512",
+        "storage": "4000",
+        "name": "production",
+        "public_addresses": "1"
+      }
+      ```
+
++ Response 201
+
+  ```
+  {
+    "instance":{
+      "authentication":{
+        "login":{
+          "password":"bGOT^M1g",
+          "username":"root"
         },
-        "id":"704",
-        "state":"RUNNING",
-        "owner_id":"322",
-        "href":"http://vm-dev/services/deltacloud/instances/704",
-        "realm":{
-          "id":"vm-prague-l1",
-          "href":"http://vm-dev/services/deltacloud/realms/vm-prague-l1"
-        },
-        "image":{
-          "id":"1",
-          "href":"http://vm-dev/services/deltacloud/images/1"
-        },
-        "name":"for-testing-2"
+        "type":"password"
+      },
+      "public_addresses":"\n  ",
+      "name":"production",
+      "hardware_profile":{
+        "href":"http://vm-dev/services/deltacloud/hardware_profiles/virtual-902",
+        "id":"virtual-902"
+      },
+      "href":"http://vm-dev/services/deltacloud/instances/902",
+      "private_addresses":null,
+      "actions":{
+        "link":[
+          {
+            "rel":"start",
+            "href":"http://vm-dev/services/deltacloud/instances/902/start",
+            "method":"post"
+          },
+          {
+            "rel":"stop",
+            "href":"http://vm-dev/services/deltacloud/instances/902/stop",
+            "method":"post"
+          },
+          {
+            "rel":"reboot",
+            "href":"http://vm-dev/services/deltacloud/instances/902/reboot",
+            "method":"post"
+          },
+          {
+            "rel":"shutdown",
+            "href":"http://vm-dev/services/deltacloud/instances/902/shutdown",
+            "method":"post"
+          },
+          {
+            "rel":"destroy",
+            "href":"http://vm-dev/services/deltacloud/instances/902/destroy",
+            "method":"post"
+          }
+        ]
+      },
+      "state":"PENDING",
+      "realm":{
+        "href":"http://vm-dev/services/deltacloud/realms/vm-prague-l1",
+        "id":"vm-prague-l1"
+      },
+      "id":"902",
+      "owner_id":"322",
+      "image":{
+        "href":"http://vm-dev/services/deltacloud/images/1",
+        "id":"1"
       }
     }
   }
@@ -415,7 +557,7 @@ FORMAT: 1A
 + Parameters
  - id (number, `704`)
 
-### Retrieve realm [GET]
+### Retrieve instance [GET]
 
 
 + Request
