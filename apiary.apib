@@ -268,3 +268,72 @@ FORMAT: 1A
   }
   ```
 
+
+## Realms Collection [/services/deltacloud/realms]
+
+### Retrieve realms [GET]
+
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      ```
+
++ Response 200
+
+  ```
+  {
+    "realms":{
+      "realm":[
+        {
+          "id":"vm-prague-l1",
+          "state":"AVAILABLE",
+          "href":"http://vm-dev/services/deltacloud/realms/vm-prague-l1",
+          "limit":null,
+          "name":"Virtualmaster Prague Locality 1"
+        },
+        {
+          "id":"vm-prague-l2",
+          "state":"AVAILABLE",
+          "href":"http://vm-dev/services/deltacloud/realms/vm-prague-l2",
+          "limit":null,
+          "name":"Virtualmaster Prague Locality 2"
+        }
+      ]
+    }
+  }
+  ```
+
+
+## Realm member [/services/deltacloud/realms/{id}]
+
++ Parameters
+ - id (string, `vm-prague-l1`)
+
+### Retrieve realm [GET]
+
+
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      ```
+
++ Response 200
+
+  ```
+  {
+    "realm":{
+      "id":"vm-prague-l1",
+      "state":"AVAILABLE",
+      "href":"http://vm-dev/services/deltacloud/realms/vm-prague-l1",
+      "limit":null,
+      "name":"vm-prague-l1"
+    }
+  }
+  ```
+
