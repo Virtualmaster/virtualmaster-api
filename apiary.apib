@@ -551,92 +551,6 @@ FORMAT: 1A
   }
   ```
 
-## Instance member stop [/services/deltacloud/instances/{id}/stop]
-
-+ Parameters
- - id (number, `704`)
-
-### Stop instance [POST]
-
-+ Request
-  - Headers
-
-      ```
-      Accept: application/json
-      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
-      ```
-
-+ Response 200
-
-  ```
-  true
-  ```
-
-
-## Instance member start [/services/deltacloud/instances/{id}/start]
-
-+ Parameters
- - id (number, `704`)
-
-### Start instance [POST]
-
-+ Request
-  - Headers
-
-      ```
-      Accept: application/json
-      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
-      ```
-
-+ Response 200
-
-  ```
-  true
-  ```
-
-
-## Instance member reboot [/services/deltacloud/instances/{id}/reboot]
-
-+ Parameters
- - id (number, `704`)
-
-### Reboot instance [POST]
-
-+ Request
-  - Headers
-
-      ```
-      Accept: application/json
-      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
-      ```
-
-+ Response 200
-
-  ```
-  true
-  ```
-
-## Instance member shutdown [/services/deltacloud/instances/{id}/shutdown]
-
-+ Parameters
- - id (number, `704`)
-
-### Shutdown instance [POST]
-
-+ Request
-  - Headers
-
-      ```
-      Accept: application/json
-      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
-      ```
-
-+ Response 200
-
-  ```
-  true
-  ```
-
 
 ## Instance member [/services/deltacloud/instances/{id}]
 
@@ -717,7 +631,94 @@ FORMAT: 1A
   }
   ```
 
-### Destroy instance [DELETE]
+
+## Instance member actions [/services/deltacloud/instances/{id}/{action}]
+
+### Instance start [POST]
+
++ Parameters
+ - id (number, `704`) ... numerical id
+ - action (string, `start`) ... `start`
+
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      ```
+
++ Response 200
+
+  ```
+  true
+  ```
+
+### Instance stop [POST]
+
++ Parameters
+ - id (number, `704`) ... numerical id
+ - action (string, `stop`) ... `stop`
+
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      ```
+
++ Response 200
+
+  ```
+  true
+  ```
+
+### Instance reboot [POST]
+
++ Parameters
+ - id (number, `704`) ... numerical id
+ - action (string, `reboot`) ... `reboot`
+
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      ```
+
++ Response 200
+
+  ```
+  true
+  ```
+
+### Instance shutdown [POST]
+
++ Parameters
+ - id (number, `704`) ... numerical id
+ - action (string, `shutdown`) ... `shutdown`
+
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      ```
+
++ Response 200
+
+  ```
+  true
+  ```
+
+### Instance destroy [POST]
+
++ Parameters
+ - id (number, `704`) ... numerical id
+ - action (string, `destroy`) ... `destroy`
 
 + Request
   - Headers
