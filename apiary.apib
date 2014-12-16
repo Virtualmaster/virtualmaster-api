@@ -551,6 +551,92 @@ FORMAT: 1A
   }
   ```
 
+## Instance member stop [/services/deltacloud/instances/{id}/stop]
+
++ Parameters
+ - id (number, `704`)
+
+### Stop instance [POST]
+
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      ```
+
++ Response 200
+
+  ```
+  true
+  ```
+
+
+## Instance member start [/services/deltacloud/instances/{id}/start]
+
++ Parameters
+ - id (number, `704`)
+
+### Start instance [POST]
+
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      ```
+
++ Response 200
+
+  ```
+  true
+  ```
+
+
+## Instance member reboot [/services/deltacloud/instances/{id}/reboot]
+
++ Parameters
+ - id (number, `704`)
+
+### Reboot instance [POST]
+
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      ```
+
++ Response 200
+
+  ```
+  true
+  ```
+
+## Instance member shutdown [/services/deltacloud/instances/{id}/shutdown]
+
++ Parameters
+ - id (number, `704`)
+
+### Shutdown instance [POST]
+
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      ```
+
++ Response 200
+
+  ```
+  true
+  ```
+
 
 ## Instance member [/services/deltacloud/instances/{id}]
 
@@ -558,7 +644,6 @@ FORMAT: 1A
  - id (number, `704`)
 
 ### Retrieve instance [GET]
-
 
 + Request
   - Headers
@@ -632,4 +717,18 @@ FORMAT: 1A
   }
   ```
 
+### Destroy instance [DELETE]
 
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      ```
+
++ Response 200
+
+  ```
+  true
+  ```
