@@ -3,7 +3,7 @@ FORMAT: 1A
 #VirtualMaster API
 
 
-## Images Collection [/deltacloud_api/images]
+## Images Collection [/services/deltacloud/images]
 
 ### Retrieve images [GET]
 
@@ -12,38 +12,41 @@ FORMAT: 1A
     
       ```
       Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
       ```
 
 + Response 200
 
   ```
   {
-    images: {
-      image: {
-        "name":"CentOS 5.4",
-        "href":"https://www.virtualmaster.com/virtualmaster/services/deltacloud/images/65",
-        "id":"65",
-        "description":"Centos 5.4<br>\nKernel: 2.6.18-164.6.1.el5xen<br>\nLast update: 9.11.2009",
-        "owner_id":"397",
-        "architecture":"x86_64"
-      },
-      image: {
-        "name":"Ubuntu 9.10",
-        "href":"https://www.virtualmaster.com/virtualmaster/services/deltacloud/images/12",
-        "id":"12",
-        "description":"Ubuntu 9.10 Karmic Koala<br/>\nKernel 2.6.31-14\nLast upadte: 9.11. 2009",
-        "owner_id":"397",
-        "architecture":"x86_64"
-      }
+    "images":{
+      "image":[
+        {
+          "name":"Debian 7.4 Wheezy minimal",
+          "owner_id":"1",
+          "href":"http://vm-dev/virtualmaster/services/deltacloud/images/3499",
+          "id":"3499",
+          "architecture":"x86_64",
+          "description":null
+        },
+        {
+          "name":"Ubuntu 12.04 LTS Precise Pangolin",
+          "owner_id":"1",
+          "href":"http://vm-dev/virtualmaster/services/deltacloud/images/3525",
+          "id":"3525",
+          "architecture":"x86_64",
+          "description":null
+        }
+      ]
     }
   }
   ```
 
 
-## Image member [/deltacloud_api/images/{id}]
+## Image member [/services/deltacloud/images/{id}]
 
 + Parameters
- - id (number, `65`)
+ - id (number, `3499`)
 
 ### Retrieve image [GET]
 
@@ -53,18 +56,215 @@ FORMAT: 1A
     
       ```
       Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
       ```
 
 + Response 200
 
   ```
   {
-    "name":"CentOS 5.4",
-    "href":"https://www.virtualmaster.com/virtualmaster/services/deltacloud/images/65",
-    "id":"65",
-    "description":"Centos 5.4<br>\nKernel: 2.6.18-164.6.1.el5xen<br>\nLast update: 9.11.2009",
-    "owner_id":"397",
-    "architecture":"x86_64"
+    "image": {
+      "name":"Debian 7.4 Wheezy minimal",
+      "owner_id":"1",
+      "href":"http://vm-dev/virtualmaster/services/deltacloud/images/3499",
+      "id":"3499",
+      "architecture":"x86_64",
+      "description":null
+    }
   }
+  ```
+
+## Hardware Profiles Collection [/services/deltacloud/hardware_profiles]
+
+### Retrieve hardware profiles [GET]
+
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      ```
+
++ Response 200
 
   ```
+  {
+    "hardware_profiles":{
+      "hardware_profile":[
+        {
+          "id":"default",
+          "property":[
+            {
+              "name":"architecture",
+              "kind":"fixed",
+              "value":"x86_64",
+              "unit":"label"
+            },
+            {
+              "range":{
+                "first":"512",
+                "last":"7000"
+              },
+              "name":"memory",
+              "param":{
+                "name":"memory",
+                "href":"http://vm-dev/services/deltacloud/instances",
+                "operation":"create",
+                "method":"post"
+              },
+              "kind":"range",
+              "value":"512",
+              "unit":"MB"
+            },
+            {
+              "range":{
+                "first":"2048",
+                "last":"250000"
+              },
+              "name":"storage",
+              "param":{
+                "name":"storage",
+                "href":"http://vm-dev/services/deltacloud/instances",
+                "operation":"create",
+                "method":"post"
+              },
+              "kind":"range",
+              "value":"2048",
+              "unit":"MB"
+            },
+            {
+              "name":"cpu",
+              "enum":{
+                "entry":[
+                  {
+                    "value":"1"
+                  },
+                  {
+                    "value":"4"
+                  }
+                ]
+              },
+              "param":{
+                "name":"enum",
+                "href":"http://vm-dev/services/deltacloud/instances",
+                "operation":"create",
+                "method":"post"
+              },
+              "kind":"enum",
+              "value":"1",
+              "unit":"count"
+            },
+            {
+              "name":"backup",
+              "enum":{
+                "entry":[
+                  {
+                    "value":"true"
+                  },
+                  {
+                    "value":"false"
+                  }
+                ]
+              },
+              "param":{
+                "name":"enum",
+                "href":"http://vm-dev/services/deltacloud/instances",
+                "operation":"create",
+                "method":"post"
+              },
+              "kind":"enum",
+              "value":"true",
+              "unit":"count"
+            }
+          ],
+          "href":"http://vm-dev/services/deltacloud/hardware_profiles/default"
+        },
+        {
+          "id":"2",
+          "property":[
+            {
+              "name":"architecture",
+              "kind":"fixed",
+              "value":"x86_64",
+              "unit":"label"
+            },
+            {
+              "name":"storage",
+              "kind":"fixed",
+              "value":"20",
+              "unit":"MB"
+            },
+            {
+              "name":"cpu",
+              "kind":"fixed",
+              "value":"2",
+              "unit":"count"
+            },
+            {
+              "name":"memory",
+              "kind":"fixed",
+              "value":"1024",
+              "unit":"MB"
+            }
+          ],
+          "href":"http://vm-dev/services/deltacloud/hardware_profiles/2"
+        }
+      ]
+    }
+  }
+  ```
+
+## Hardware profile member [/services/deltacloud/hardware_profiles/{id}]
+
++ Parameters
+ - id (number, `2`)
+
+### Retrieve hardware profile [GET]
+
+
++ Request
+  - Headers
+
+      ```
+      Accept: application/json
+      Authorization: Basic Nm5tODI6RVFFa3M5b1dydnpudnlzdVgwSTc4c0ZfOU9BX1hoTW55YTdLOGt3
+      ```
+
++ Response 200
+
+  ```
+  {
+    "hardware_profile":{
+      "id":"2",
+      "property":[
+        {
+          "name":"architecture",
+          "kind":"fixed",
+          "value":"x86_64",
+          "unit":"label"
+        },
+        {
+          "name":"storage",
+          "kind":"fixed",
+          "value":"20",
+          "unit":"MB"
+        },
+        {
+          "name":"cpu",
+          "kind":"fixed",
+          "value":"2",
+          "unit":"count"
+        },
+        {
+          "name":"memory",
+          "kind":"fixed",
+          "value":"1024",
+          "unit":"MB"
+        }
+      ],
+      "href":"http://vm-dev/services/deltacloud/hardware_profiles/2"
+    }
+  }
+  ```
+
